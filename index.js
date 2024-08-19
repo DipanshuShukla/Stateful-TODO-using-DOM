@@ -15,6 +15,7 @@ function addTodo() {
 
     input.value = "";
     render();
+    persist();
 }
 
 function render() {
@@ -24,10 +25,10 @@ function render() {
             ? "<li class='nothing'>Nothing to do here. Start by adding a TODO.</li>"
             : "";
 
-    todos.forEach((todoItem, i) => {
+    todos.forEach((todoItem) => {
         const todo = document.createElement("li");
         const text = document.createElement("span");
-        text.innerText = `${i + 1}.  ` + todoItem.text;
+        text.innerText = todoItem.text;
 
         const btn = document.createElement("button");
         btn.setAttribute("onclick", `deleteTodo(${todoItem.id})`);
@@ -43,4 +44,21 @@ function render() {
 function deleteTodo(id) {
     todos = todos.filter((td) => td.id !== id);
     render();
+    persist();
 }
+
+function persist() {
+    localStorage.setItem("DOM-todo-app-todos", JSON.stringify(todos));
+    localStorage.setItem("DOM-todo-app-todoID", todoID);
+}
+
+function init() {
+    const savedTodos = localStorage.getItem("DOM-todo-app-todos");
+    todos = savedTodos ? JSON.parse(savedTodos) : [];
+    todoID = todos.length > 0 ? Math.max(...todos.map((todo) => todo.id)) : 0;
+    render();
+}
+
+document.addEventListener("DOMContentLoaded", function () {
+    init();
+});
