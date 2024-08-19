@@ -9,7 +9,6 @@ You can view a live demo of the application [here](https://stateful-todo-using-d
 ## Features
 
 - **Add Tasks**: Users can add new tasks to the todo list.
-- **Mark as Completed**: Tasks can be marked as completed, visually differentiating them from incomplete tasks.
 - **Delete Tasks**: Users can remove tasks from the list.
 - **Persistent State**: The state of the todo list (tasks added, completed, or deleted) persists during the session.
 
